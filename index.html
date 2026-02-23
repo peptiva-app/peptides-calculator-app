@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kalkulator Peptydów</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#0f172a;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+.container{
+    background:#1e293b;
+    padding:25px;
+    border-radius:15px;
+    width:350px;
+}
+h1{
+    text-align:center;
+}
+input{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:8px;
+    border:none;
+}
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#3b82f6;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+button:hover{
+    background:#2563eb;
+}
+.result{
+    margin-top:15px;
+    font-size:18px;
+    text-align:center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Kalkulator</h1>
+
+<label>Ilość proszku (mg)</label>
+<input type="number" id="powder" placeholder="np. 10">
+
+<label>Ilość rozpuszczalnika (ml)</label>
+<input type="number" id="liquid" placeholder="np. 2">
+
+<label>Dawka (mcg)</label>
+<input type="number" id="dose" placeholder="np. 250">
+
+<button onclick="calculate()">Oblicz</button>
+
+<div class="result" id="result"></div>
+</div>
+
+<script>
+function calculate(){
+    let powder = parseFloat(document.getElementById("powder").value);
+    let liquid = parseFloat(document.getElementById("liquid").value);
+    let dose = parseFloat(document.getElementById("dose").value);
+
+    if(!powder || !liquid || !dose){
+        document.getElementById("result").innerHTML = "Uzupełnij wszystkie pola.";
+        return;
+    }
+
+    let concentration = (powder * 1000) / liquid;
+    let needed = dose / concentration;
+
+    document.getElementById("result").innerHTML =
+        "Nabierz: <b>" + needed.toFixed(2) + " ml</b>";
+}
+</script>
+
+</body>
+</html>
